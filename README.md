@@ -24,3 +24,7 @@ Minor features, fixes and improvements
 ### 0.1.2
 
 Add image icon to extension in marketplace
+
+### 0.1.3
+
+- Hotfix

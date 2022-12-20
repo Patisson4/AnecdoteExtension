@@ -13,3 +13,7 @@
 ## [0.1.2]
 
 - Feat: add image icon to extension in marketplace
+
+## [0.1.3]
+
+- Fix: remove jokes.json from initial download in order not to remove favourite jokes on every update
