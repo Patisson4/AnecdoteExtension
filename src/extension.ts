@@ -1,5 +1,3 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { join } from 'path';
 import fetch from 'node-fetch';
@@ -11,6 +9,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	let currentPanel: vscode.WebviewPanel | undefined = undefined;
 
+	context.subscriptions.push(vscode.commands.registerCommand('anecdotextension.requestJoke', () => showJoke(context)));
+
 	context.subscriptions.push(
 		vscode.commands.registerCommand('anecdotextension.showStats', () => {
 			const columnToShowIn = vscode.window.activeTextEditor
@@ -18,14 +18,13 @@ export async function activate(context: vscode.ExtensionContext) {
 				: undefined;
 
 			if (currentPanel) {
-				// If we already have a panel, show it in the target column
 				currentPanel.reveal(columnToShowIn);
 			} else {
 				currentPanel = vscode.window.createWebviewPanel(
-					'anecdotextension', // Identifies the type of the webview. Used internally
+					'anecdotextension', // Identifies the type of the webview; used internally
 					'Anecdote Stats', // Title of the panel displayed to the user
-					vscode.ViewColumn.One, // Editor column to show the new webview panel in.
-					{} // Webview options. More on these later.
+					vscode.ViewColumn.One, // Editor column to show the new webview panel in
+					{} // Webview options
 				);
 
 				const jokeArray = getJsonContent(join(context.extensionPath, 'jokes.json'));
@@ -37,7 +36,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
 				currentPanel.webview.html = getWebviewContent(spanArray.join(""));
 
-				// Reset when the current panel is closed
 				currentPanel.onDidDispose(
 					() => {
 						currentPanel = undefined;
@@ -55,7 +53,6 @@ export async function activate(context: vscode.ExtensionContext) {
 	statusBarItem.show();
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() { }
 
 async function getJoke() {
@@ -90,7 +87,7 @@ async function showJoke(context: vscode.ExtensionContext) {
 	const joke = await getJoke();
 	vscode.window.showInformationMessage(joke, 'Like', 'Next').then(arg => {
 		if (arg === 'Next') {
-			showJoke(context);
+			setTimeout(() => showJoke(context), 300);
 		}
 		else if (arg === 'Like') {
 			addJsonContent(join(context.extensionPath, 'jokes.json'), joke);
