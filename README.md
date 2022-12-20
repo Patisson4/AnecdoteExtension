@@ -16,3 +16,7 @@ Problems with updating page with favourite anecdotes while it webview is active 
 ### 0.0.1
 
 Initial release of extension
+
+### 0.1.1
+
+Minor features, fixes and improvements
