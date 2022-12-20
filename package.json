@@ -2,7 +2,8 @@
   "name": "anecdotextension",
   "displayName": "Anecdote Extension",
   "description": "Simple VS Code extension to welcome you with an anecdote after launch",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "icon": "icon.jpg",
   "engines": {
     "vscode": "^1.73.0"
   },

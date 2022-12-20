@@ -20,3 +20,7 @@ Initial release of extension
 ### 0.1.1
 
 Minor features, fixes and improvements
+
+### 0.1.2
+
+Add image icon to extension in marketplace
