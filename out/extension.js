@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
 const path_1 = require("path");
 const node_fetch_1 = require("node-fetch");
@@ -11,19 +9,19 @@ const fs = require("fs");
 async function activate(context) {
     showJoke(context);
     let currentPanel = undefined;
+    context.subscriptions.push(vscode.commands.registerCommand('anecdotextension.requestJoke', () => showJoke(context)));
     context.subscriptions.push(vscode.commands.registerCommand('anecdotextension.showStats', () => {
         const columnToShowIn = vscode.window.activeTextEditor
             ? vscode.window.activeTextEditor.viewColumn
             : undefined;
         if (currentPanel) {
-            // If we already have a panel, show it in the target column
             currentPanel.reveal(columnToShowIn);
         }
         else {
-            currentPanel = vscode.window.createWebviewPanel('anecdotextension', // Identifies the type of the webview. Used internally
+            currentPanel = vscode.window.createWebviewPanel('anecdotextension', // Identifies the type of the webview; used internally
             'Anecdote Stats', // Title of the panel displayed to the user
-            vscode.ViewColumn.One, // Editor column to show the new webview panel in.
-            {} // Webview options. More on these later.
+            vscode.ViewColumn.One, // Editor column to show the new webview panel in
+            {} // Webview options
             );
             const jokeArray = getJsonContent((0, path_1.join)(context.extensionPath, 'jokes.json'));
             let spanArray = new Array();
@@ -31,7 +29,6 @@ async function activate(context) {
                 spanArray.push(`<p>${jokeArray[index]}</p>`);
             }
             currentPanel.webview.html = getWebviewContent(spanArray.join(""));
-            // Reset when the current panel is closed
             currentPanel.onDidDispose(() => {
                 currentPanel = undefined;
             }, null, context.subscriptions);
@@ -43,7 +40,6 @@ async function activate(context) {
     statusBarItem.show();
 }
 exports.activate = activate;
-// This method is called when your extension is deactivated
 function deactivate() { }
 exports.deactivate = deactivate;
 async function getJoke() {
@@ -76,7 +72,7 @@ async function showJoke(context) {
     const joke = await getJoke();
     vscode.window.showInformationMessage(joke, 'Like', 'Next').then(arg => {
         if (arg === 'Next') {
-            showJoke(context);
+            setTimeout(() => showJoke(context), 300);
         }
         else if (arg === 'Like') {
             addJsonContent((0, path_1.join)(context.extensionPath, 'jokes.json'), joke);
