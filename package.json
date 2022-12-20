@@ -1,8 +1,8 @@
 {
   "name": "anecdotextension",
   "displayName": "Anecdote Extension",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Simple VS Code extension to welcome you with an anecdote after launch",
+  "version": "0.1.1",
   "engines": {
     "vscode": "^1.73.0"
   },
@@ -15,7 +15,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onCommand:anecdotextension.requestJoke"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -24,7 +25,12 @@
         "command": "anecdotextension.showStats",
         "title": "Show anecdote statistics",
         "category": "Anecdotes"
-      }
+      },
+      {
+        "command": "anecdotextension.requestJoke",
+        "title": "Request random anecdote",
+        "category": "Anecdotes"
+      }      
     ]
   },
   "scripts": {
