@@ -6,14 +6,24 @@
 
 ## [0.1.1]
 
-- Fix: jokes.json file now contains no jokes after initial plugin installation
-- Feat: new command to request a random joke - no more expensive reboots to see fresh joke!
-- Chore: API calls rate to get next joke is limited to 0.3 s
+- Jokes.json file now contains no jokes after initial plugin installation
+- New command to request a random joke - no more expensive reboots to see fresh joke!
+- API calls rate to get next joke is limited to 0.3 s
 
 ## [0.1.2]
 
-- Feat: add image icon to extension in marketplace
+- Add image icon to extension in marketplace
 
 ## [0.1.3]
 
-- Fix: remove jokes.json from initial download in order not to remove favourite jokes on every update
+- Remove jokes.json from initial download in order not to remove favorite jokes on every update
+
+## [0.1.4]
+
+- Actual fix of accidental favorite jokes removal
+
+## [1.1.4]
+
+- Breaking changes: command `showJoke` renamed to `showFavorite`
+- Now you can can call command `requestJoke` via presing button on status bar
+- New image icon

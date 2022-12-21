@@ -10,7 +10,7 @@ async function activate(context) {
     showJoke(context);
     let currentPanel = undefined;
     context.subscriptions.push(vscode.commands.registerCommand('anecdotextension.requestJoke', () => showJoke(context)));
-    context.subscriptions.push(vscode.commands.registerCommand('anecdotextension.showStats', () => {
+    context.subscriptions.push(vscode.commands.registerCommand('anecdotextension.showFavorite', () => {
         const columnToShowIn = vscode.window.activeTextEditor
             ? vscode.window.activeTextEditor.viewColumn
             : undefined;
@@ -34,10 +34,14 @@ async function activate(context) {
             }, null, context.subscriptions);
         }
     }));
-    const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
-    statusBarItem.text = 'Favourite Jokes';
-    statusBarItem.command = 'anecdotextension.showStats';
-    statusBarItem.show();
+    const statusBarItem1 = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
+    statusBarItem1.text = 'Random Joke';
+    statusBarItem1.command = 'anecdotextension.requestJoke';
+    statusBarItem1.show();
+    const statusBarItem2 = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
+    statusBarItem2.text = 'Favorite Jokes';
+    statusBarItem2.command = 'anecdotextension.showFavorite';
+    statusBarItem2.show();
 }
 exports.activate = activate;
 function deactivate() { }
@@ -104,7 +108,7 @@ function getWebviewContent(content) {
   <head>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <title>Favourite Jokes</title>
+	  <title>Favorite Jokes</title>
   </head>
   <body>
 	  	${content}
