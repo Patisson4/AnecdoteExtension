@@ -4,8 +4,8 @@ Extension adds welcome anecdotes when starting VS Code!
 
 ## Features
 
-Read jokes from rzhunemogu.ru after launching VS Code and like your favorite.
-You can reread the jokes you like by clicking on the widget in the status bar or by calling the command.
+Read jokes from [rzhunemogu.ru](http://rzhunemogu.ru) after launching VS Code and like your favorite.
+You can then read jokes you liked by clicking on the widget in the status bar or by calling the command.
 
 ## Known Issues
 
